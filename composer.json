@@ -1,0 +1,52 @@
+{
+    "name": "indykoning/php-jsonl",
+    "description": "PHP JSSONL library for fast JSON Lines parsing and writing.",
+    "keywords": [
+        "jsonl",
+        "JSON Lines",
+        "jsonlines",
+        "JSON",
+        "PHP"
+    ],
+    "homepage": "https://github.com/indykoning/",
+    "authors": [
+        {
+            "name": "Indy Koning",
+            "homepage": "https://indykoning.nl",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^8.1"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.12",
+        "phpunit/phpunit": "^11.3.5",
+        "squizlabs/php_codesniffer": "^3.12"
+    },
+    "autoload": {
+        "psr-4": {
+            "Indykoning\\Jsonl\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Indykoning\\Jsonl\\Tests\\": "tests"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "analyse": "phpstan --memory-limit=256M",
+        "test": "phpunit",
+        "phpcs": "vendor/bin/phpcs --colors --extensions=php,phtml src",
+        "phpcbf": "vendor/bin/phpcbf --colors -extensions=php src || exit 0",
+        "codestyle": [
+          "@phpcbf",
+          "@phpcs"
+        ]
+    }
+}
