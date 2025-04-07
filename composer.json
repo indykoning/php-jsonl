@@ -1,11 +1,17 @@
 {
     "name": "indykoning/php-jsonl",
-    "description": "PHP JSSONL library for fast JSON Lines parsing and writing.",
+    "description": "PHP JSONL library for fast JSON Lines parsing and writing.",
     "keywords": [
         "jsonl",
         "JSON Lines",
         "jsonlines",
         "JSON",
+        "Newline delimited JSON",
+        "newline-delimited JSON",
+        "ndjson",
+        "LDJSON",
+        "Line delimited JSON",
+        "line-delimited JSON",
         "PHP"
     ],
     "homepage": "https://github.com/indykoning/",
@@ -42,8 +48,8 @@
     "scripts": {
         "analyse": "phpstan --memory-limit=256M",
         "test": "phpunit",
-        "phpcs": "vendor/bin/phpcs --colors --extensions=php,phtml src",
-        "phpcbf": "vendor/bin/phpcbf --colors -extensions=php src || exit 0",
+        "phpcs": "vendor/bin/phpcs --standard=PSR12 --colors --exclude=Generic.Files.LineLength --extensions=php,phtml src",
+        "phpcbf": "vendor/bin/phpcbf --standard=PSR12 --colors --exclude=Generic.Files.LineLength --extensions=php src || exit 0",
         "codestyle": [
           "@phpcbf",
           "@phpcs"

@@ -82,17 +82,22 @@ response()->streamDownload(
 
         $data = enrichData($data);
 
-        $resource = fopen('php://output', 'w');
-        \Indykoning\Jsonl\Jsonl::encodeToResource($resource, $data);
+        foreach(\Indykoning\Jsonl\Jsonl::encode($data) as $chunk) {
+            echo $chunk;
+            ob_flush();
+            flush();
+        }
     },
     'data.jsonl',
     [
-        'Content-Type' => 'application/jsonl'
+        'Content-Type' => 'application/jsonl',
+        'X-Accel-Buffering' => 'no'
     ]
 );
 ```
 
 With this code we'll be dealing with every json line one by one, enriching the data and passing it on to the client.
+When the client stops requesting data we will stop requesting and enriching data.
 
 #### Running tests
 ``` bash
@@ -100,4 +105,4 @@ composer test
 ```
 
 #### License
-This library is licensed under the MIT license. Please see [LICENSE](LICENSE.md) for more details.
+This library is licensed under the MIT license. Please see [LICENSE](LICENSE) for more details.

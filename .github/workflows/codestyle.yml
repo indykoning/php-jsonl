@@ -1,4 +1,4 @@
-name: PHPUnit Tests
+name: Code Style
 
 on: 
   push: 
@@ -9,7 +9,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    name: analyse
+    name: PHPCS
 
     steps:
       - name: Checkout code
@@ -25,5 +25,5 @@ jobs:
       - name: Install dependencies
         run: composer install --no-interaction
 
-      - name: Test
-        run: composer run test
+      - name: Analyse
+        run: composer run phpcs
