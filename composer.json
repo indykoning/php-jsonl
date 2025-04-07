@@ -42,6 +42,7 @@
             "Indykoning\\Jsonl\\Tests\\": "tests"
         }
     },
+    "license": "MIT",
     "config": {
         "sort-packages": true
     },
