@@ -99,6 +99,14 @@ response()->streamDownload(
 With this code we'll be dealing with every json line one by one, enriching the data and passing it on to the client.
 When the client stops requesting data we will stop requesting and enriching data.
 
+#### Why not package X or Y instead?
+
+I haven't found any php Json Lines package that deals with JSON Lines in a natural and efficient way.
+Either relying on files to encode/decode JSON.
+Or loading the entire File or data into memory first, which is a problem for big data.
+
+This package allows extremely simple encoding/decoding, taking advantage of streaming and generators to reduce memory footprint.
+
 #### Running tests
 ``` bash
 composer test
