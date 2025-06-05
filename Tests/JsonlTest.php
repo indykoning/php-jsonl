@@ -1,6 +1,7 @@
 <?php
 
 use Indykoning\Jsonl\Jsonl;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class JsonlTest extends TestCase
@@ -34,6 +35,13 @@ class JsonlTest extends TestCase
         unlink(__DIR__ . '/data/test_encode_to_file.jsonl');
     }
 
+    public function testJsonlEncodeIncorrectResource()
+    {
+        $data = [['key' => 'value'], ['key2' => 'value2']];
+        $this->expectException(InvalidArgumentException::class);
+        Jsonl::encodeToResource('', $data);
+    }
+
     public function testJsonlDecodeFromFile()
     {
         $expected = [['key' => 'value'], ['key2' => 'value2']];
@@ -41,5 +49,11 @@ class JsonlTest extends TestCase
 
         $this->assertEquals($expected, iterator_to_array(Jsonl::decodeFromResource($file, true)));
         fclose($file);
+    }
+
+    public function testJsonlDecodeIncorrectResource()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        iterator_to_array(Jsonl::decodeFromResource('', true));
     }
 }

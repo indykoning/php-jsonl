@@ -11,6 +11,7 @@
 namespace Indykoning\Jsonl;
 
 use Generator;
+use InvalidArgumentException;
 use Traversable;
 
 /**
@@ -66,6 +67,10 @@ class Jsonl
         ?bool $associative = null,
         int $depth = 512
     ): Generator {
+        if (!is_resource($resource)) {
+            throw new InvalidArgumentException('decodeFromResource expects a resource "' . gettype($resource) . '" was passed');
+        }
+
         while (($line = fgets($resource)) !== false) {
             foreach (static::decode($line, $associative, $depth) as $item) {
                 yield $item;
@@ -103,6 +108,10 @@ class Jsonl
         $resource,
         Traversable|array $lines
     ): void {
+        if (!is_resource($resource)) {
+            throw new InvalidArgumentException('encodeToResource expects a resource "' . gettype($resource) . '" was passed');
+        }
+
         foreach (self::encode($lines) as $line) {
             if (!fwrite($resource, $line)) {
                 throw new \RuntimeException('Failed to write to resource');
